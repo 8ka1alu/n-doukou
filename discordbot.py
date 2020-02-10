@@ -55,6 +55,26 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
+async def on_vc_start(member,channel):
+    await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}でボイスチャットを開始しました。")
+
+@client.event
+async def on_vc_end(member,channel):
+    await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}のボイスチャットを終了しました。")
+
+@client.event
+async def on_voice_state_update(member,before,after):
+    if before.channel != after.channel:
+        # before.channelとafter.channelが異なるなら入退室
+        if after.channel and len(after.channel.members) == 1:
+            # もし、ボイスチャットが開始されたら
+            client.dispatch("vc_start",member,after.channel) #発火！
+
+        if before.channel and len(before.channel.members) == 0:
+            # もし、ボイスチャットが終了したら
+            client.dispatch("vc_end",member,before.channel) #発火！
+
+@client.event
 async def on_message(message):
     """メッセージを処理"""
     if message.content.startswith("BOT再起動"): #から始まるメッセージ 
