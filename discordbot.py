@@ -55,11 +55,11 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
-async def on_vc_start(member,channel):
+async def vc_start(member,channel):
     await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}でボイスチャットを開始しました。")
 
 @client.event
-async def on_vc_end(member,channel):
+async def vc_end(member,channel):
     await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}のボイスチャットを終了しました。")
 
 @client.event
