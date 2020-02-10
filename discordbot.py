@@ -1,7 +1,7 @@
 import discord 
 import os
 from discord.ext import tasks
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 import re
 import asyncio
@@ -552,7 +552,7 @@ async def on_member_join(member):
 @client.event
 async def on_voice_state_update(member, before, after): 
     if member.guild.id == 613341065365291008 and (before.channel != after.channel):
-        now = datetime.now()
+        now = datetime.utcnow() + timedelta(hours=9)
         alert_channel = client.get_channel(676378599158317056)
         if before.channel is None: 
             msg = f'{now:%m/%d-%H:%M} に {member.name} が {after.channel.name} に参加しました。'
