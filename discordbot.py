@@ -74,7 +74,7 @@ async def on_voice_state_update(member, before, after):
 
         if before.channel and len(before.channel.members) == 0:
             # もし、ボイスチャットが終了したら
-            await client.get_channel(CHANNEL_ID).send(f"{member.name}さんが通話を終了しました。\n場所：<#{before.channel.id}>")
+            await client.get_channel(CHANNEL_ID).send(f"{member.name}さんが通話を終了しました。\n場所：{before.channel.name}")
 
 @client.event
 async def on_message(message):
