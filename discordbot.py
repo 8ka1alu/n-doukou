@@ -70,11 +70,11 @@ async def on_voice_state_update(member, before, after):
         # before.channelとafter.channelが異なるなら入退室
         if after.channel and len(after.channel.members) == 1:
             # もし、ボイスチャットが開始されたら
-            await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}でボイスチャットを開始しました。")
+            await client.get_channel(CHANNEL_ID).send(f"{member.name}が{after.channel.name}でボイスチャットを開始しました。")
 
         if before.channel and len(before.channel.members) == 0:
             # もし、ボイスチャットが終了したら
-            await client.get_channel(CHANNEL_ID).send(f"{member.name}が{channel.name}のボイスチャットを終了しました。")
+            await client.get_channel(CHANNEL_ID).send(f"{member.name}が{before.channel.name}のボイスチャットを終了しました。")
 
 @client.event
 async def on_message(message):
