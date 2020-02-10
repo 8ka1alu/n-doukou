@@ -557,7 +557,7 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    if message.channel.id == CHANNEL_ID:
+    if member.guild.id == CHANNEL_ID:
         injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
         await client.get_channel(CHANNEL_ID4).send(member.name)
         await client.get_channel(CHANNEL_ID4).send(member.id)
