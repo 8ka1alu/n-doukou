@@ -55,7 +55,17 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
-async def discord.on_voice_state_update(member, before, after):
+async def on_voice_state_update(member, before, after): 
+    if member.guild.id == 613341065365291008 and (before.channel != after.channel):
+        now = datetime.utcnow() + timedelta(hours=9)
+        alert_channel = client.get_channel(676378599158317056)
+        if before.channel is None: 
+            msg = f'{now:%m/%d-%H:%M} に {member.name} が {after.channel.name} に参加しました。'
+            await alert_channel.send(msg)
+        elif after.channel is None: 
+            msg = f'{now:%m/%d-%H:%M} に {member.name} が {before.channel.name} から退出しました。'
+            await alert_channel.send(msg)
+
     if before.channel != after.channel:
         # before.channelとafter.channelが異なるなら入退室
         if after.channel and len(after.channel.members) == 1:
@@ -554,19 +564,6 @@ async def on_member_join(member):
         await client.get_channel(CHANNEL_ID4).send(member.name)
         await client.get_channel(CHANNEL_ID4).send(member.id)
         await client.get_channel(CHANNEL_ID).send(injoin)
- 
-@client.event
-async def on_voice_state_update(member, before, after): 
-    if member.guild.id == 613341065365291008 and (before.channel != after.channel):
-        now = datetime.utcnow() + timedelta(hours=9)
-        alert_channel = client.get_channel(676378599158317056)
-        if before.channel is None: 
-            msg = f'{now:%m/%d-%H:%M} に {member.name} が {after.channel.name} に参加しました。'
-            await alert_channel.send(msg)
-        elif after.channel is None: 
-            msg = f'{now:%m/%d-%H:%M} に {member.name} が {before.channel.name} から退出しました。'
-            await alert_channel.send(msg)
-
                  
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
