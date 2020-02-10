@@ -55,7 +55,7 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
-async def on_voice_state_update(member, before, after):
+async def discord.on_voice_state_update(member, before, after):
     if before.channel != after.channel:
         # before.channelとafter.channelが異なるなら入退室
         if after.channel and len(after.channel.members) == 1:
