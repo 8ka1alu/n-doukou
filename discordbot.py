@@ -55,7 +55,9 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
-async def on_voice_state_update(member, before, after): 
+async def on_voice_state_update(member, before, after):
+    if not member.guild.id == 613341065365291008:
+        return
     if member.guild.id == 613341065365291008 and (before.channel != after.channel):
         now = datetime.utcnow() + timedelta(hours=9)
         alert_channel = client.get_channel(676378599158317056)
