@@ -80,14 +80,6 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
     """メッセージを処理"""
-    if message.content.startswith("BOT再起動"): #から始まるメッセージ 
-        await asyncio.sleep(7200)
-        channel = client.get_channel(CHANNEL_ID2)
-        await channel.send(' 2時間たちました！') 
- 
-    if message.content.startswith("23"): 
-        await message.channel.send('2時間たちました！') 
-    
 #おみくじ
     if message.content == "おみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
@@ -225,12 +217,6 @@ async def on_message(message):
                 elif page_count == 4:
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
-
-    if message.content == 'お知らせ': 
-        if message.author.id == great_owner_id:
-            await message.delete()
-            await asyncio.sleep(0.5)
-            await client.get_channel(CHANNEL_ID5).send('>>> **お知らせ**\n<@&613345887933956096>\n｢ヘルプ｣機能を一新！\nその他様々な機能を導入！\n詳細はヘルプを確認！\n\nver' + ksi_ver)
 
     if message.content.startswith("スロット"): 
         suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
@@ -450,7 +436,7 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    if message.content == 'ステータスE':
+    if message.content == 'ステータス':
         if message.author.guild_permissions.administrator:
             embed = discord.Embed(title="この鯖のステータス",description="Embed式")
             embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
