@@ -14,9 +14,9 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 
 #チャンネルID
 CHANNEL_ID = 613341065365291010  #top
-CHANNEL_ID2 = 613346606347190274 #testlog
+CHANNEL_ID2 = 694053188013391882 #testlog
 CHANNEL_ID3 = 624496341124513793 #omikuji
-CHANNEL_ID4 = 613346909154836517 #ID取得
+CHANNEL_ID4 = 694053188013391882 #ID取得
 CHANNEL_ID5 = 613343508153106443
 CHANNEL_IDother = 661705202424086547
 
@@ -46,7 +46,6 @@ async def on_ready():
     print('----------------')
     print('Hello World,リマインドbotプログラム「project-RRN」、起動しました')
     channel = client.get_channel(CHANNEL_ID2)
-    await channel.purge()
     await channel.send(f'名前:{client.user.name}')  # ボットの名前
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
