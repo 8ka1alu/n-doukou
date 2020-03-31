@@ -513,19 +513,93 @@ async def on_message(message):
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
+    now = datetime.now().strftime('%H')
+    if now == '01':
+        morning_txt = 'おはようです。ですが、まだ1:00ですよ。'
+        evening_txt = 'おやすみなさい。良い夢見て下さいね。'
+    elif now == '02':
+        morning_txt = 'おはようです。ですが、まだ2:00ですよ。'
+        evening_txt = 'おやすみなさい。良い夢見て下さいね。'
+    elif now == '03':
+        morning_txt = 'おはようです。ですが、まだ3:00ですよ。'
+        evening_txt = 'おやすみなさい。夜更かしはあまり良くないですよ。'
+    elif now == '04':
+        morning_txt = 'おはようです。早起きは良いことです。'
+        evening_txt = 'おやすみなさい。健康のため、もう少し早く寝ましょう。'
+    elif now == '05':
+        morning_txt = 'おはようです。早起きは良いことです。'
+        evening_txt = 'おやすみなさい。もう5:00ですよ。'
+    elif now == '06':
+        morning_txt = 'おはようです。早起きは良いことです。'
+        evening_txt = 'おやすみなさい。もう6:00ですよ。'
+    elif now == '07':
+        morning_txt = 'おはようです。良い朝ですね。'
+        evening_txt = 'おやすみなさい。もう朝です。もっと早く眠れるようにしましょう。'
+    elif now == '08':
+        morning_txt = 'おはようです。朝食は何でしょう。パンかな。ご飯かな。'
+        evening_txt = 'おやすみなさい。次の日が休みであっても、早く寝ましょう。'
+    elif now == '09':
+        morning_txt = 'おはようです。今日も一日頑張りましょう。'
+        evening_txt = 'おやすみなさい。昼夜逆転生活はあまり良くありません。'
+    elif now == '10':
+        morning_txt = 'おはようです。今日も一日頑張りましょう。'
+        evening_txt = 'おやすみなさい。この時間は起きていられるよう、早寝早起きを習慣付けましょう。'
+    elif now == '11':
+        morning_txt = 'おそようです。もう少し早く起きられるように頑張りましょう。'
+        evening_txt = 'おやすみなさい。昼寝には少し早いようです。'
+    elif now == '12':
+        morning_txt = 'おそよーです。もうお昼ですよ。'
+        evening_txt = 'おやすみなさい。軽い昼寝は20分程度がオススメです。'
+    elif now == '13':
+        morning_txt = 'おはようです。残り半日も頑張りましょう。'
+        evening_txt = 'おやすみなさい。長めの昼寝は90分程度がオススメです。'
+    elif now == '14':
+        morning_txt = 'おはようです。14:00です。'
+        evening_txt = 'おやすみなさい。長く寝過ぎないように。'
+    elif now == '15':
+        morning_txt = 'おはようです。今日のおやつは何かな？'
+        evening_txt = 'おやすみなさい。長く寝過ぎないように。'
+    elif now == '16':
+        morning_txt = 'おはようです。長く寝過ぎるのは体には良くありません。'
+        evening_txt = 'おやすみなさい。寝るにはまだ早いような気がします。'
+    elif now == '17':
+        morning_txt = 'おはようです。もう17:00ですよ。'
+        evening_txt = 'おやすみなさい。まだ寝るには早いような気がします。'
+    elif now == '18':
+        morning_txt = 'おはようです。もう18:00。夕食時です。'
+        evening_txt = 'おやすみなさい。まだまだ寝るには早いような気がします。'
+    elif now == '19':
+        morning_txt = 'おはようです。もう19:00。一日が終わりに近づいていますよ。'
+        evening_txt = 'おやすみなさい。早寝は良いことです。'
+    elif now == '20':
+        morning_txt = 'おはようです。20:00です。これから夜がはじまります。'
+        evening_txt = 'おやすみなさい。良い夢を見て下さい。'
+    elif now == '21':
+        morning_txt = 'おはようです。もう夜ですよ。今の生活を改めましょう。'
+        evening_txt = 'おやすみなさい。良い夢を見ることを願っています。'
+    elif now == '22':
+        morning_txt = 'おはようです。まもなく日付が変わります。'
+        evening_txt = 'おやすみなさい。明日も良い一日になるように。'
+    elif now == '23':
+        morning_txt = 'おはようです。まもなく日付が変わりますよ。'
+        evening_txt = 'おやすみなさい。明日も頑張りましょう。'
+    else:
+        morning_txt = 'おはようです。起きるには早すぎます。'
+        evening_txt = 'おやすみなさい。日付が変わりました。'
+    
     if message.content.startswith("おはよ"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.author.id == master_owner_id:
             await message.channel.send('おはようございます！マスターさん！今日も一日頑張って下さい！') 
         if not message.author.id == master_owner_id:
-            await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
+            await message.channel.send(f"{message.author.mention} さん。{morning_txt}") 
 
     if message.content.startswith("おやす"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.author.id == master_owner_id:
             await message.channel.send('おやすみなさい！マスターさん！今日も一日お疲れさまでした！') 
         if not message.author.id == master_owner_id:
-            await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
+            await message.channel.send(f"{message.author.mention} さん。{evening_txt}") 
 
 #年月日
     if all(s in message.content for s in['何日？']):
