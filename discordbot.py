@@ -81,6 +81,8 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
     """メッセージを処理"""
+    if message.author.id == my_bot_id:
+        return
 #おみくじ
     if message.content == "おみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
