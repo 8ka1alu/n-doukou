@@ -1,7 +1,8 @@
 import discord 
 import os
 from discord.ext import tasks
-from datetime import datetime, timedelta
+from datetime import timedelta
+import datetime
 import random
 import re
 import asyncio
@@ -513,7 +514,7 @@ async def on_message(message):
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
-    now = datetime.now().strftime('%H')
+    now = datetime.datetime.now().strftime('%H')
     if now == '01':
         morning_txt = 'おはようです。ですが、まだ1:00ですよ。'
         evening_txt = 'おやすみなさい。良い夢見て下さいね。'
@@ -602,13 +603,37 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention} さん。{evening_txt}") 
 
 #年月日
-    if all(s in message.content for s in['何日？']):
-        date = datetime.now()
+    if message.content == '何日？':
+        date = datetime.datetime.now()
         await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
-    if all(s in message.content for s in ['何時？']):
-        date = datetime.now()
+    if message.content == '何時？':
+        date = datetime.datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
-
+    if message.content == '時計':
+        weekdays = datetime.date.today().weekday()
+        if weekdays == 0:
+            weekday_name = "月曜日"
+        elif weekdays == 1:
+            weekday_name = "火曜日"
+        elif weekdays == 2:
+            weekday_name = "水曜日"
+        elif weekdays == 3:
+            weekday_name = "木曜日"
+        elif weekdays == 4:
+            weekday_name = "金曜日"
+        elif weekdays == 5:
+            weekday_name = "土曜日"
+        elif weekdays == 6:
+            weekday_name = "日曜日"
+        else:
+            weekday_name = "エラー"
+        date = datetime.datetime.now()
+        embed = discord.Embed(title="時計", description="TimeZone(Japan)",color=random.choice((0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5)))
+        embed.add_field(name="日付", value=f'{date.year}年{date.month}月{date.day}日{weekday_name}', inline=False)
+        embed.add_field(name="時間", value=f'{date.hour}時{date.minute}分{date.second}秒', inline=False)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/688986679956340804/690461569854996490/180half_f.gif")
+        await message.channel.send(embed=embed)
+        
     if message.content == '!restart': 
         if message.author.id == great_owner_id:
             await message.channel.send('再起動します')
@@ -630,7 +655,7 @@ async def on_member_join(member):
 @tasks.loop(seconds=60)
 async def loop():
     # 現在の時刻
-    now = datetime.now().strftime('%H:%M')
+    now = datetime.datetime.now().strftime('%H:%M')
     if now == '09:00':
         channel = client.get_channel(CHANNEL_ID)
         await channel.send('９：００です！おはようございます！今日も一日頑張りましょう！')  
