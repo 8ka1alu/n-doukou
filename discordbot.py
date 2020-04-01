@@ -266,9 +266,9 @@ async def on_message(message):
                 await asyncio.sleep(3)
                 coinp = 0
                 while coinp < 6:
-                    await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                    await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
                     await asyncio.sleep(0.5)
-                    await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                    await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
                     await asyncio.sleep(0.5)
                     coinp += 1
                 await my_message.edit(content='抽選中：　```定義：●は表、○は裏```')
@@ -306,9 +306,9 @@ async def on_message(message):
             await asyncio.sleep(3)
             coinp = 0
             while coinp < 6:
-                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
                 await asyncio.sleep(0.5)
-                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
                 await asyncio.sleep(0.5)
                 coinp += 1
             await my_message.edit(content='抽選中：　```定義：●は表、○は裏```')
