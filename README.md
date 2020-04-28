@@ -1,1 +1,1 @@
-# discordpy-startup
+# N同好会用
